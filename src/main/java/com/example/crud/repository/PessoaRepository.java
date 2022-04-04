@@ -7,6 +7,7 @@ import com.example.crud.models.Pessoa;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Deprecated
 public class PessoaRepository {
     
     ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
@@ -26,5 +27,29 @@ public class PessoaRepository {
                 pessoas.remove(i);
             }
         }
+    }
+
+    public Pessoa findByCpf(String cpf) {
+        for (int i = 0; i < pessoas.size(); i++) {
+            Pessoa pessoa = pessoas.get(i);
+            if (pessoa.getCpf().equals(cpf)) {
+                return pessoa;
+            }
+        }
+
+        return null;
+    }
+
+    public Pessoa update(Pessoa pessoa){
+        for (int i = 0; i < pessoas.size(); i++) {
+            Pessoa p = pessoas.get(i);
+            if(p.getCpf().equals(pessoa.getCpf())) {
+                pessoas.remove(i);
+                pessoas.add(pessoa);
+                return pessoa;
+            }
+        }
+
+        return null;
     }
 }
